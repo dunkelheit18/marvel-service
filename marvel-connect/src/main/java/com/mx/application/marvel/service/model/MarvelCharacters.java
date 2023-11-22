@@ -1,7 +1,6 @@
 package com.mx.application.marvel.service.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *	@author jahernandezg 
@@ -13,7 +12,7 @@ public class MarvelCharacters implements Serializable {
 	private Integer id;
 	private String name;
 	private String description;
-	private Date modified;
+	private String modified;
 	private MarvelComics comics;
 	private MarvelEvents events;
 	private MarvelSeries series;
@@ -59,13 +58,13 @@ public class MarvelCharacters implements Serializable {
 	/**
 	 * @return the modified
 	 */
-	public Date getModified() {
+	public String getModified() {
 		return modified;
 	}
 	/**
 	 * @param modified the modified to set
 	 */
-	public void setModified(Date modified) {
+	public void setModified(String modified) {
 		this.modified = modified;
 	}
 	/**

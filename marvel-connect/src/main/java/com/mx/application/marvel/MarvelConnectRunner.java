@@ -1,5 +1,6 @@
 package com.mx.application.marvel;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import com.mx.application.marvel.service.model.MarvelCharacteresResponse;
 @Component
 public class MarvelConnectRunner implements CommandLineRunner{
 
+	@Autowired
 	private MarvelService marvelService;
 	
 	@Override

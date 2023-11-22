@@ -2,7 +2,6 @@ package com.mx.application.marvel.service.impl;
 
 import static com.mx.application.marvel.utils.endpoint.MarvelEndpoint.CHARACTERES;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -39,9 +38,8 @@ public class MarvelServiceImpl implements MarvelService {
 		
 		MarvelCharacteresResponse response = new MarvelCharacteresResponse();
 		response.setSuccess(false);
-		String parameters = CHARACTERES + "?name=" + marvelCharacteresRequest.getName() +
-				"&apikey=5365d50e0ed423f38197671843b5d60a";
-		String serviceResponse = marvelClientService.getServiceConnect(CHARACTERES);
+		String parameters = CHARACTERES + "&name=" + marvelCharacteresRequest.getName();
+		String serviceResponse = marvelClientService.getServiceConnect(parameters);
 		
 		if(serviceResponse != null && !serviceResponse.isEmpty()) {
 		
@@ -68,19 +66,16 @@ public class MarvelServiceImpl implements MarvelService {
 		
 		MarvelCharacters character = new MarvelCharacters();
 		
-		JsonNode node = json.get("results");
-		JsonNode ident = node.get("id");
-		JsonNode name = node.get("name");
-		JsonNode desc = node.get("description");
-		JsonNode date = node.get("modified");
+		JsonNode node = json.findParent("results");
+		JsonNode ident = node.findValue("id");
+		JsonNode name = node.findValue("name");
+		JsonNode desc = node.findValue("description");
+		JsonNode date = node.findValue("modified");
 
-		@SuppressWarnings("deprecation")
-		Date modifi = new Date(date.asText());
-		
 		character.setId(ident.asInt());
 		character.setName(name.asText());
 		character.setDescription(desc.asText());
-		character.setModified(modifi);
+		character.setModified(date.asText());
 		character.setComics(getComicsObject(json));
 		character.setEvents(getEventsObject(json));
 		character.setSeries(getSeriesObject(json));
@@ -95,10 +90,10 @@ public class MarvelServiceImpl implements MarvelService {
 		Map<String, String> objectMap = new HashMap<>();
 		MarvelStories stories = new MarvelStories();
 		
-		JsonNode node = json.get("stories");
-		JsonNode available = node.get("available");
-		JsonNode url = node.get("collectionURI");
-		JsonNode data = node.get("items");
+		JsonNode node = json.findValue("stories");
+		JsonNode available = node.findValue("available");
+		JsonNode url = node.findValue("collectionURI");
+		JsonNode data = node.findParent("items");
 
 		
 		objectMap =  this.getMap(data);
@@ -115,10 +110,10 @@ public class MarvelServiceImpl implements MarvelService {
 		Map<String, String> objectMap = new HashMap<>();
 		MarvelSeries series = new MarvelSeries();
 		
-		JsonNode node = json.get("series");
-		JsonNode available = node.get("available");
-		JsonNode url = node.get("collectionURI");
-		JsonNode data = node.get("items");
+		JsonNode node = json.findValue("series");
+		JsonNode available = node.findValue("available");
+		JsonNode url = node.findValue("collectionURI");
+		JsonNode data = node.findParent("items");
 		
 		objectMap =  this.getMap(data);
 	
@@ -134,10 +129,10 @@ public class MarvelServiceImpl implements MarvelService {
 		Map<String, String> objectMap = new HashMap<>();
 		MarvelComics comics = new MarvelComics();
 		
-		JsonNode node = json.get("comics");
-		JsonNode available = node.get("available");
-		JsonNode url = node.get("collectionURI");
-		JsonNode data = node.get("items");
+		JsonNode node = json.findValue("comics");
+		JsonNode available = node.findValue("available");
+		JsonNode url = node.findValue("collectionURI");
+		JsonNode data = node.findParent("items");
 		
 		objectMap =  this.getMap(data);
 	
@@ -153,10 +148,10 @@ public class MarvelServiceImpl implements MarvelService {
 		Map<String, String> objectMap = new HashMap<>();
 		MarvelEvents events = new MarvelEvents();
 		
-		JsonNode node = json.get("events");
-		JsonNode available = node.get("available");
-		JsonNode url = node.get("collectionURI");
-		JsonNode data = node.get("items");
+		JsonNode node = json.findValue("events");
+		JsonNode available = node.findValue("available");
+		JsonNode url = node.findValue("collectionURI");
+		JsonNode data = node.findParent("items");
 		
 		objectMap =  this.getMap(data);
 	
