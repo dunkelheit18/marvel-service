@@ -2,6 +2,7 @@ package com.mx.application.marvel.service.impl;
 
 import static com.mx.application.marvel.utils.endpoint.MarvelEndpoint.CHARACTERES;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.mx.application.marvel.service.MarvelClientService;
 import com.mx.application.marvel.service.MarvelService;
 import com.mx.application.marvel.service.model.MarvelCharacteresRequest;
 import com.mx.application.marvel.service.model.MarvelCharacteresResponse;
+import com.mx.application.marvel.service.model.MarvelCharacters;
 import com.mx.application.marvel.service.model.MarvelComics;
 import com.mx.application.marvel.service.model.MarvelEvents;
 import com.mx.application.marvel.service.model.MarvelSeries;
@@ -35,29 +37,58 @@ public class MarvelServiceImpl implements MarvelService {
 	public MarvelCharacteresResponse getCharacteres
 		(MarvelCharacteresRequest marvelCharacteresRequest) {
 		
-		MarvelCharacteresResponse response = null;
-		
+		MarvelCharacteresResponse response = new MarvelCharacteresResponse();
+		response.setSuccess(false);
+		String parameters = CHARACTERES + "?name=" + marvelCharacteresRequest.getName() +
+				"&apikey=5365d50e0ed423f38197671843b5d60a";
 		String serviceResponse = marvelClientService.getServiceConnect(CHARACTERES);
 		
 		if(serviceResponse != null && !serviceResponse.isEmpty()) {
 		
 			ObjectMapper mapper = new ObjectMapper();
 			try {
-				JsonNode jsonNode = mapper.readTree(serviceResponse);
-				MarvelComics comics   = getComicsObject(jsonNode);
-				MarvelEvents events   = getEventsObject(jsonNode);
-				MarvelSeries series   = getSeriesObject(jsonNode);
-				MarvelStories stories = getStoriesObject(jsonNode);
+				JsonNode jsonNode = mapper.readTree(serviceResponse);			
+				MarvelCharacters characters = this.getCharactersObject(jsonNode);
+				response.setSuccess(true);
+				response.setMarvelCharacters(characters);
 				
 			} catch (JsonMappingException e) {
+				response.setSuccess(false);
 				e.printStackTrace();
 			} catch (JsonProcessingException e) {
+				response.setSuccess(false);
 				e.printStackTrace();
 			}
 		}
 		
 		return response;
 	}
+	
+	private MarvelCharacters getCharactersObject(JsonNode json) {
+		
+		MarvelCharacters character = new MarvelCharacters();
+		
+		JsonNode node = json.get("results");
+		JsonNode ident = node.get("id");
+		JsonNode name = node.get("name");
+		JsonNode desc = node.get("description");
+		JsonNode date = node.get("modified");
+
+		@SuppressWarnings("deprecation")
+		Date modifi = new Date(date.asText());
+		
+		character.setId(ident.asInt());
+		character.setName(name.asText());
+		character.setDescription(desc.asText());
+		character.setModified(modifi);
+		character.setComics(getComicsObject(json));
+		character.setEvents(getEventsObject(json));
+		character.setSeries(getSeriesObject(json));
+		character.setStories(getStoriesObject(json));
+		
+		return character;
+	}
+	
 	
 	private MarvelStories getStoriesObject(JsonNode json) {
 		
@@ -68,14 +99,12 @@ public class MarvelServiceImpl implements MarvelService {
 		JsonNode available = node.get("available");
 		JsonNode url = node.get("collectionURI");
 		JsonNode data = node.get("items");
-		String availa = available.asText();
+
 		
 		objectMap =  this.getMap(data);
-		
-		Integer avaFormat = Integer.parseInt(availa);
 	
 		stories.setCollectionURI(url.asText());
-		stories.setAvailable(avaFormat);
+		stories.setAvailable(available.asInt());
 		stories.setItems(objectMap);
 		
 		return stories;
@@ -90,14 +119,11 @@ public class MarvelServiceImpl implements MarvelService {
 		JsonNode available = node.get("available");
 		JsonNode url = node.get("collectionURI");
 		JsonNode data = node.get("items");
-		String availa = available.asText();
 		
 		objectMap =  this.getMap(data);
-		
-		Integer avaFormat = Integer.parseInt(availa);
 	
 		series.setCollectionURI(url.asText());
-		series.setAvailable(avaFormat);
+		series.setAvailable(available.asInt());
 		series.setItems(objectMap);
 		
 		return series;
@@ -112,14 +138,11 @@ public class MarvelServiceImpl implements MarvelService {
 		JsonNode available = node.get("available");
 		JsonNode url = node.get("collectionURI");
 		JsonNode data = node.get("items");
-		String availa = available.asText();
 		
 		objectMap =  this.getMap(data);
-		
-		Integer avaFormat = Integer.parseInt(availa);
 	
 		comics.setCollectionURI(url.asText());
-		comics.setAvailable(avaFormat);
+		comics.setAvailable(available.asInt());
 		comics.setItems(objectMap);
 		
 		return comics;
@@ -134,14 +157,11 @@ public class MarvelServiceImpl implements MarvelService {
 		JsonNode available = node.get("available");
 		JsonNode url = node.get("collectionURI");
 		JsonNode data = node.get("items");
-		String availa = available.asText();
 		
 		objectMap =  this.getMap(data);
-		
-		Integer avaFormat = Integer.parseInt(availa);
 	
 		events.setCollectionURI(url.asText());
-		events.setAvailable(avaFormat);
+		events.setAvailable(available.asInt());
 		events.setItems(objectMap);
 		
 		return events;
