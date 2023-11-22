@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +18,13 @@ public class Events implements Serializable {
 
 	private static final long serialVersionUID = -733392748603236160L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_EVENTS")
 	private Integer id;
+	
+	@Column(name = "ID_CHARACTERER")
+	private Integer idCharacter;
 	
 	@Column(name = "RESOURCE_EVENTS")
 	private String resources;
@@ -65,5 +73,19 @@ public class Events implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the idCharacter
+	 */
+	public Integer getIdCharacter() {
+		return idCharacter;
+	}
+
+	/**
+	 * @param idCharacter the idCharacter to set
+	 */
+	public void setIdCharacter(Integer idCharacter) {
+		this.idCharacter = idCharacter;
 	}
 }
