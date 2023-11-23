@@ -4,6 +4,7 @@ import static com.mx.application.marvel.utils.business.MarvelUtils.getComicsItem
 import static com.mx.application.marvel.utils.business.MarvelUtils.getEventsItems;
 import static com.mx.application.marvel.utils.business.MarvelUtils.getSeriesItems;
 import static com.mx.application.marvel.utils.business.MarvelUtils.getStoriesItems;
+import static com.mx.application.marvel.utils.business.MarvelUtils.getCharacterData;
 import static com.mx.application.marvel.utils.endpoint.MarvelEndpoint.CHARACTERES;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,12 @@ public class MarvelServiceImpl implements MarvelService {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				MarvelCharacters obj = mapper.readValue(serviceResponse, MarvelCharacters.class);
+				String[] charactersData =  getCharacterData(obj);
 				
+				response.setId(Integer.parseInt(charactersData[0]));
+				response.setName(charactersData[1]);
+				response.setDescription(charactersData[2]);
+				response.setModified(charactersData[3]);
 				response.setComics(getComicsItems(obj));
 				response.setEvents(getEventsItems(obj));
 				response.setSeries(getSeriesItems(obj));

@@ -32,7 +32,7 @@ class MarvelConnectApplicationTests {
 		
 		String result = mapper.writeValueAsString(response);
 		assertNotNull(result);
-		System.out.println(result);
+		System.out.println("\n" + "[ "+result + "]");
 	}
 
 }

@@ -18,6 +18,36 @@ import com.mx.application.marvel.service.model.MarvelStories;
  */
 public class MarvelUtils {
 
+	public static String[] getCharacterData(MarvelCharacters characters) {
+		
+		String id = "";
+		String name = "";
+		String description = "";
+		String modified = "";
+		
+		LinkedHashMap<?, ?> data = characters.getData().getResults().stream()
+				.filter(p -> p instanceof LinkedHashMap<?,?>)
+				.map(o -> (LinkedHashMap<?,?>) o)
+				.collect(Collectors.toList()).get(0);
+		
+		for (Entry<?,?> entry : data.entrySet()) {
+			if(id.isEmpty()) {
+				id = entry.getKey().toString().equals("id") ? entry.getValue().toString() : "";
+			}
+			if(name.isEmpty()) {
+				name = entry.getKey().toString().equals("name") ? entry.getValue().toString() : "";
+			}
+			if(description.isEmpty()) {
+				description = entry.getKey().toString().equals("description") ? entry.getValue().toString() : "";
+			}
+			if(modified.isEmpty()) {
+				modified = entry.getKey().toString().equals("modified") ? entry.getValue().toString() : "";
+			}
+		}
+		
+		return new String[] {id, name, description, modified};
+	}
+	
 	public static List<MarvelStories> getStoriesItems(MarvelCharacters characters) {
 		
 		LinkedHashMap<?, ?> data = characters.getData().getResults().stream()

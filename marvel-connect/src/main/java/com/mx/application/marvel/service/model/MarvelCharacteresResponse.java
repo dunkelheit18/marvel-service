@@ -11,6 +11,10 @@ public class MarvelCharacteresResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Boolean success;
+	private Integer Id;
+	private String name;
+	private String description;
+	private String modified;
 	private MarvelCharacters marvelCharacters;
 	private List<MarvelComics> comics;
 	private List<MarvelEvents> events;
@@ -88,5 +92,53 @@ public class MarvelCharacteresResponse implements Serializable {
 	 */
 	public void setSeries(List<MarvelSeries> series) {
 		this.series = series;
+	}
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return Id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		Id = id;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	/**
+	 * @return the modified
+	 */
+	public String getModified() {
+		return modified;
+	}
+	/**
+	 * @param modified the modified to set
+	 */
+	public void setModified(String modified) {
+		this.modified = modified;
 	}
 }
