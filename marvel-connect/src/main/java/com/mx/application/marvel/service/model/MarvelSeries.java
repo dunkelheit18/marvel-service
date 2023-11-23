@@ -1,7 +1,7 @@
 package com.mx.application.marvel.service.model;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author jahernandezg
@@ -12,7 +12,7 @@ public class MarvelSeries implements Serializable {
 	
 	private Integer available;
 	private String collectionURI;
-	private Map<String, String> items;
+	private List<MarvelItems> items;
 	
 	/**
 	 * @return the available
@@ -41,14 +41,13 @@ public class MarvelSeries implements Serializable {
 	/**
 	 * @return the items
 	 */
-	public Map<String, String> getItems() {
+	public List<MarvelItems> getItems() {
 		return items;
 	}
 	/**
 	 * @param items the items to set
 	 */
-	public void setItems(Map<String, String> items) {
+	public void setItems(List<MarvelItems> items) {
 		this.items = items;
 	}
-	
 }

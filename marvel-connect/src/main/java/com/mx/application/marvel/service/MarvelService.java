@@ -13,4 +13,10 @@ public interface MarvelService {
 	 * @return marvelCharacteresRequest
 	 */
 	public MarvelCharacteresResponse getCharacteres(MarvelCharacteresRequest marvelCharacteresRequest);
+	
+	/**
+	 * @param idCharacters
+	 * @return marvelCharacteresRequest
+	 */
+	public MarvelCharacteresResponse getCharacteresById(Integer idCharacters);
 }

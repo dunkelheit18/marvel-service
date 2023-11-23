@@ -1,118 +1,100 @@
 package com.mx.application.marvel.service.model;
 
-import java.io.Serializable;
-
 /**
- *	@author jahernandezg 
+ * @author jahernandezg
  */
-public class MarvelCharacters implements Serializable {
+public class MarvelCharacters {
 
-	private static final long serialVersionUID = -209001465022937020L;
-	
-	private Integer id;
-	private String name;
-	private String description;
-	private String modified;
-	private MarvelComics comics;
-	private MarvelEvents events;
-	private MarvelSeries series;
-	private MarvelStories stories;
-	
+	private Integer code;
+	private String status;
+	private String copyright;
+	private String attributionText;
+	private String attributionHTML;
+	private MarvelData marvelData;
+	private String etag;
 	
 	/**
-	 * @return the id
+	 * @return the status
 	 */
-	public Integer getId() {
-		return id;
+	public String getStatus() {
+		return status;
 	}
 	/**
-	 * @param id the id to set
+	 * @param status the status to set
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	/**
-	 * @return the name
+	 * @return the copyright
 	 */
-	public String getName() {
-		return name;
+	public String getCopyright() {
+		return copyright;
 	}
 	/**
-	 * @param name the name to set
+	 * @param copyright the copyright to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setCopyright(String copyright) {
+		this.copyright = copyright;
 	}
 	/**
-	 * @return the description
+	 * @return the attributionText
 	 */
-	public String getDescription() {
-		return description;
+	public String getAttributionText() {
+		return attributionText;
 	}
 	/**
-	 * @param description the description to set
+	 * @param attributionText the attributionText to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setAttributionText(String attributionText) {
+		this.attributionText = attributionText;
 	}
 	/**
-	 * @return the modified
+	 * @return the attributionHTML
 	 */
-	public String getModified() {
-		return modified;
+	public String getAttributionHTML() {
+		return attributionHTML;
 	}
 	/**
-	 * @param modified the modified to set
+	 * @param attributionHTML the attributionHTML to set
 	 */
-	public void setModified(String modified) {
-		this.modified = modified;
+	public void setAttributionHTML(String attributionHTML) {
+		this.attributionHTML = attributionHTML;
 	}
 	/**
-	 * @return the comics
+	 * @return the etag
 	 */
-	public MarvelComics getComics() {
-		return comics;
+	public String getEtag() {
+		return etag;
 	}
 	/**
-	 * @param comics the comics to set
+	 * @param etag the etag to set
 	 */
-	public void setComics(MarvelComics comics) {
-		this.comics = comics;
+	public void setEtag(String etag) {
+		this.etag = etag;
 	}
 	/**
-	 * @return the events
+	 * @return the code
 	 */
-	public MarvelEvents getEvents() {
-		return events;
+	public Integer getCode() {
+		return code;
 	}
 	/**
-	 * @param events the events to set
+	 * @param code the code to set
 	 */
-	public void setEvents(MarvelEvents events) {
-		this.events = events;
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 	/**
-	 * @return the series
+	 * @return the data
 	 */
-	public MarvelSeries getSeries() {
-		return series;
+	public MarvelData getData() {
+		return marvelData;
 	}
 	/**
-	 * @param series the series to set
+	 * @param marvelData the data to set
 	 */
-	public void setSeries(MarvelSeries series) {
-		this.series = series;
-	}
-	/**
-	 * @return the stories
-	 */
-	public MarvelStories getStories() {
-		return stories;
-	}
-	/**
-	 * @param stories the stories to set
-	 */
-	public void setStories(MarvelStories stories) {
-		this.stories = stories;
+	public void setData(MarvelData marvelData) {
+		this.marvelData = marvelData;
 	}
 }

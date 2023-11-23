@@ -26,7 +26,7 @@ public class MarvelClientServiceImpl implements MarvelClientService {
 		try {
 			uri = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) uri.openConnection();
-			//connection.setRequestMethod("GET");
+			connection.setRequestMethod("GET");
 			
 			int responseCode = connection.getResponseCode();
 			
