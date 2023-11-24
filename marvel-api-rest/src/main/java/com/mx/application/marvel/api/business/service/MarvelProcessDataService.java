@@ -5,5 +5,5 @@ package com.mx.application.marvel.api.business.service;
  */
 public interface MarvelProcessDataService {
 
-	public void saveCharactersData(String name);
+	public boolean saveCharactersData(String name);
 }
