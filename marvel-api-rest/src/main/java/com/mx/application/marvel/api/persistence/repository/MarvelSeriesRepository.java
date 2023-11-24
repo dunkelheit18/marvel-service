@@ -1,5 +1,7 @@
 package com.mx.application.marvel.api.persistence.repository;
 
+import static com.mx.application.marvel.api.persistence.constants.MarvelQuerys.ALL_SERIES;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +17,7 @@ import com.mx.application.marvel.api.persistence.entity.Series;
  */
 public interface MarvelSeriesRepository extends JpaRepository<Series, Integer>{
 
-	@Query(nativeQuery = true, value = "SELECT DISTINCT RESOURCE_SERIES,  ID_SERIES, ID_CHARACTERER, NAME_SERIES FROM SERIES WHERE ID_CHARACTERER = :idCharacter")
+	@Query(nativeQuery = true, value = ALL_SERIES)
 	List<Object> getSeriesAll(@Param("idCharacter") Integer idCharacter);
 	
 	default List<Series> getAllbyId(@Param("idCharacter") Integer idCharacter){

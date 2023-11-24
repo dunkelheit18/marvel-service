@@ -5,5 +5,7 @@ package com.mx.application.marvel.api.business.service;
  */
 public interface MarvelProcessDataService {
 
-	public boolean saveCharactersData(String name);
+	public boolean saveCharactersDataByName(String name);
+	
+	public boolean saveCharactersDataById(Integer id);
 }

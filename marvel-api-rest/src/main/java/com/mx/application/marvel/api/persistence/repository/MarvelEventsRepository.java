@@ -1,5 +1,7 @@
 package com.mx.application.marvel.api.persistence.repository;
 
+import static com.mx.application.marvel.api.persistence.constants.MarvelQuerys.ALL_EVENTS;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +17,7 @@ import com.mx.application.marvel.api.persistence.entity.Events;
  */
 public interface MarvelEventsRepository extends JpaRepository<Events, Integer>{
 
-	@Query(nativeQuery = true, value = "SELECT DISTINCT RESOURCE_EVENTS,  ID_EVENTS, ID_CHARACTERER, NAME_EVENTS FROM EVENTS WHERE ID_CHARACTERER = :idCharacter")
+	@Query(nativeQuery = true, value = ALL_EVENTS)
 	List<Object> getEventsAll(@Param("idCharacter") Integer idCharacter);
 	
 	default List<Events> getAllbyId(Integer idCharacter){

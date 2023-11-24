@@ -7,5 +7,7 @@ import com.mx.application.marvel.service.model.MarvelCharacteresResponse;
  */
 public interface MarvelExctractService {
 
-	public MarvelCharacteresResponse extractData(String name);
+	public MarvelCharacteresResponse extractDataByName(String name);
+	
+	public MarvelCharacteresResponse extractDataById(Integer idCharacters);
 }

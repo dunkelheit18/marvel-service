@@ -19,6 +19,6 @@ public class MarvelProcessDataServiceTest {
 	
 	@Test
 	public void executeProcesstest() {
-		marvelProcessDataService.saveCharactersData("Thor");
+		marvelProcessDataService.saveCharactersDataByName("Thor");
 	}
 }

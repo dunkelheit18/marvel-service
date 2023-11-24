@@ -16,7 +16,12 @@ public class MarvelExctractServiceImpl implements MarvelExctractService {
 	@Autowired
 	private MarvelConnectionService marvelConnectionService;
 	
-	public MarvelCharacteresResponse extractData(String name) {
+	public MarvelCharacteresResponse extractDataByName(String name) {
 		 return marvelConnectionService.findCharactersByName(name);
+	}
+
+	@Override
+	public MarvelCharacteresResponse extractDataById(Integer idCharacters) {
+		return marvelConnectionService.findCharactersById(idCharacters);
 	}
 }

@@ -24,7 +24,16 @@ public class MarvelApiController {
 	public ResponseEntity<?> extracToMarvelCharactersByName
 		(@RequestParam(name = "name", required = true) String name) {
 		
-		marvelProcessDataService.saveCharactersData(name);
+		marvelProcessDataService.saveCharactersDataByName(name);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PostMapping(path = "/characters/extractId")
+	public ResponseEntity<?> extracToMarvelCharactersById
+		(@RequestParam(name = "id", required = true) Integer id) {
+		
+		marvelProcessDataService.saveCharactersDataById(id);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

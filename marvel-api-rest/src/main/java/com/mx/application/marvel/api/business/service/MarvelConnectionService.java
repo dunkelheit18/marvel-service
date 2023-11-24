@@ -8,4 +8,6 @@ import com.mx.application.marvel.service.model.MarvelCharacteresResponse;
 public interface MarvelConnectionService {
 
 	public MarvelCharacteresResponse findCharactersByName(String name);
+	
+	public MarvelCharacteresResponse findCharactersById(Integer idCharacters);
 }

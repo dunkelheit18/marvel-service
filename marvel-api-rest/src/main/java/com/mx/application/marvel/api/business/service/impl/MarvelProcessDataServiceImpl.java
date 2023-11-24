@@ -51,11 +51,33 @@ public class MarvelProcessDataServiceImpl implements MarvelProcessDataService{
 	private MarvelCharactersRepository marvelCharactersRepository;
 	
 	@Override
-	public boolean saveCharactersData(String name) {
+	public boolean saveCharactersDataByName(String name) {
 		
 		boolean bandera = true;
 		try {
-			MarvelCharacteresResponse response = marvelExctractService.extractData(name);
+			MarvelCharacteresResponse response = marvelExctractService.extractDataByName(name);
+			
+			if(response != null && response.getSuccess()) {
+				
+				this.saveComics(response.getComics(), response.getId());
+				this.saveEvents(response.getEvents(), response.getId());
+				this.saveSeries(response.getSeries(), response.getId());
+				this.saveStories(response.getStories(), response.getId());
+				this.saveCharacters(response.getId(), response.getName());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			bandera = false;
+		}
+		
+		return bandera;
+	}
+	
+	@Override
+	public boolean saveCharactersDataById(Integer id) {
+		boolean bandera = true;
+		try {
+			MarvelCharacteresResponse response = marvelExctractService.extractDataById(id);
 			
 			if(response != null && response.getSuccess()) {
 				

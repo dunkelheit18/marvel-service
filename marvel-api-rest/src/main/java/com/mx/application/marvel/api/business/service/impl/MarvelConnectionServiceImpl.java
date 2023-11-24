@@ -26,4 +26,10 @@ public class MarvelConnectionServiceImpl implements MarvelConnectionService {
 		request.setName(name);
 		return marvelService.getCharacteres(request);
 	}
+
+
+	@Override
+	public MarvelCharacteresResponse findCharactersById(Integer idCharacters) {
+		return marvelService.getCharacteresById(idCharacters);
+	}
 }
