@@ -25,16 +25,15 @@ public interface MarvelSeriesRepository extends JpaRepository<Series, Integer>{
 		List<Object> objects = getSeriesAll(idCharacter);
 		
 		return objects.stream().map(o -> {
-			Series series = new Series();
 			
 			Object[] obj = ObjectUtils.toObjectArray(o);
 			
-			series.setResources(obj[0].toString());
-			series.setId(Integer.parseInt(obj[1].toString()));
-			series.setIdCharacter(Integer.parseInt(obj[2].toString()));
-			series.setName(obj[3].toString());
-			
-			return series;
+			return Series.builder()
+					.resources(obj[0].toString())
+					.id(Integer.parseInt(obj[1].toString()))
+					.idCharacter(Integer.parseInt(obj[2].toString()))
+					.name(obj[3].toString())
+					.build();
 			
 		}).collect(Collectors.toList());
 	}

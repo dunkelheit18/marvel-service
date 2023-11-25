@@ -25,16 +25,15 @@ public interface MarvelStoriesRepository extends JpaRepository<Stories, Integer>
 		List<Object> objects = getStoriessAll(idCharacter);
 		
 		return objects.stream().map(o -> {
-			Stories stories = new Stories();
 			
 			Object[] obj = ObjectUtils.toObjectArray(o);
 			
-			stories.setResources(obj[0].toString());
-			stories.setId(Integer.parseInt(obj[1].toString()));
-			stories.setIdCharacter(Integer.parseInt(obj[2].toString()));
-			stories.setName(obj[3].toString());
-			
-			return stories;
+			return Stories.builder()
+					.resources(obj[0].toString())
+					.id(Integer.parseInt(obj[1].toString()))
+					.idCharacter(Integer.parseInt(obj[2].toString()))
+					.name(obj[3].toString())
+					.build();
 			
 		}).collect(Collectors.toList());
 	}

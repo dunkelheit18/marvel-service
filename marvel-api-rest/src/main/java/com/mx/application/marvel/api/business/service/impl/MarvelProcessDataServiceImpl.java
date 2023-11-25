@@ -100,12 +100,12 @@ public class MarvelProcessDataServiceImpl implements MarvelProcessDataService{
 		if(!CollectionUtils.isEmpty(lisComics)) {
 			List<Comics> comicsList =  lisComics.stream().filter
 					(n -> !CollectionUtils.isEmpty(n.getItems())).map(i -> {		
-				return i.getItems().stream().map(mi -> {
-					Comics comics = new Comics();
-					comics.setIdCharacter(idCharacters);
-					comics.setName(mi.getName());
-					comics.setResources(mi.getResourceURI());				
-					return comics;
+				return i.getItems().stream().map(mi -> {				
+					return Comics.builder()
+							.idCharacter(idCharacters)
+							.name(mi.getName())
+							.resources(mi.getResourceURI())
+							.build();
 				}).toList();
 			}).toList().get(0);
 			
@@ -119,11 +119,12 @@ public class MarvelProcessDataServiceImpl implements MarvelProcessDataService{
 			List<Events> eventsList = lisevEnts.stream().filter
 					(n -> !CollectionUtils.isEmpty(n.getItems())).map(i -> {
 				return i.getItems().stream().map(e -> {
-					 Events events = new Events();
-					 events.setIdCharacter(idCharacters);
-					 events.setName(e.getName());
-					 events.setResources(e.getResourceURI());
-					 return events;
+
+					 return Events.builder()
+								.idCharacter(idCharacters)
+								.name(e.getName())
+								.resources(e.getResourceURI())
+								.build();
 				 }).toList();
 			 }).toList().get(0);
 			
@@ -137,11 +138,11 @@ public class MarvelProcessDataServiceImpl implements MarvelProcessDataService{
 		 List<Series> seriesList = lisevSeries.stream().filter
 					(n -> !CollectionUtils.isEmpty(n.getItems())).map(i -> {
 				return i.getItems().stream().map(s -> {
-					Series series = new Series();
-					 series.setIdCharacter(idCharacters);
-					 series.setName(s.getName());
-					 series.setResources(s.getResourceURI());
-					 return series;
+					 return Series.builder()
+								.idCharacter(idCharacters)
+								.name(s.getName())
+								.resources(s.getResourceURI())
+								.build();
 				}).toList();
 			}).toList().get(0);
 			
@@ -155,11 +156,11 @@ public class MarvelProcessDataServiceImpl implements MarvelProcessDataService{
 		  List<Stories> storiesList =	lisStories.stream().filter
 					(n -> !CollectionUtils.isEmpty(n.getItems())).map(i -> {
 				return i.getItems().stream().map(s -> {
-					Stories stories = new Stories();				
-					stories.setIdCharacter(idCharacters);
-					stories.setName(s.getName());
-					stories.setResources(s.getResourceURI());
-					return stories;
+					return Stories.builder()
+							.idCharacter(idCharacters)
+							.name(s.getName())
+							.resources(s.getResourceURI())
+							.build();
 				}).toList();	
 			}).collect(Collectors.toList()).get(0);
 			
@@ -173,19 +174,16 @@ public class MarvelProcessDataServiceImpl implements MarvelProcessDataService{
 		
 		if(!CollectionUtils.isEmpty(listObject)) {
 			List<Characters> listCharac = listObject.stream().filter(n -> n != null).map(o -> {		
-				Characters chara = new Characters();
 				Object[] obj = ObjectUtils.toObjectArray(o);
 				
-				if(obj != null && obj.length > 0) {
-					chara.setIdComics(Integer.parseInt(obj[0].toString()));
-					chara.setIdEvents(Integer.parseInt(obj[1].toString()));
-					chara.setIdSeries(Integer.parseInt(obj[2].toString()));
-					chara.setIdStories(Integer.parseInt(obj[3].toString()));
-					chara.setIdCharacter(id);
-					chara.setNameCharacter(name);
-				}
-				
-				return chara;
+				return obj != null && obj.length > 0 ? Characters.builder()
+						.idComics(Integer.parseInt(obj[0].toString()))
+						.idEvents(Integer.parseInt(obj[1].toString()))
+						.idSeries(Integer.parseInt(obj[2].toString()))
+						.idStories(Integer.parseInt(obj[3].toString()))
+						.idCharacter(id)
+						.nameCharacter(name)
+						.build() : Characters.builder().build();
 			}).collect(Collectors.toList());
 			
 			marvelCharactersRepository.saveAll(listCharac);

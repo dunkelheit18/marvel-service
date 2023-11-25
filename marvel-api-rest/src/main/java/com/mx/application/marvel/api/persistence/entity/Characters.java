@@ -9,9 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author jahernandezg
  */
+@Getter
+@Setter
+@Builder
 @Entity
 @Table(name = "CHARACTERS")
 public class Characters implements Serializable {
@@ -40,103 +47,4 @@ public class Characters implements Serializable {
 	
 	@Column(name = "NAME_CHARACTER")
 	private String nameCharacter;
-	
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the idCharacter
-	 */
-	public Integer getIdCharacter() {
-		return idCharacter;
-	}
-
-	/**
-	 * @param idCharacter the idCharacter to set
-	 */
-	public void setIdCharacter(Integer idCharacter) {
-		this.idCharacter = idCharacter;
-	}
-
-	/**
-	 * @return the idComics
-	 */
-	public Integer getIdComics() {
-		return idComics;
-	}
-
-	/**
-	 * @param idComics the idComics to set
-	 */
-	public void setIdComics(Integer idComics) {
-		this.idComics = idComics;
-	}
-
-	/**
-	 * @return the idEvents
-	 */
-	public Integer getIdEvents() {
-		return idEvents;
-	}
-
-	/**
-	 * @param idEvents the idEvents to set
-	 */
-	public void setIdEvents(Integer idEvents) {
-		this.idEvents = idEvents;
-	}
-
-	/**
-	 * @return the idSeries
-	 */
-	public Integer getIdSeries() {
-		return idSeries;
-	}
-
-	/**
-	 * @param idSeries the idSeries to set
-	 */
-	public void setIdSeries(Integer idSeries) {
-		this.idSeries = idSeries;
-	}
-
-	/**
-	 * @return the idStories
-	 */
-	public Integer getIdStories() {
-		return idStories;
-	}
-
-	/**
-	 * @param idStories the idStories to set
-	 */
-	public void setIdStories(Integer idStories) {
-		this.idStories = idStories;
-	}
-
-	/**
-	 * @return the nameCharacter
-	 */
-	public String getNameCharacter() {
-		return nameCharacter;
-	}
-
-	/**
-	 * @param nameCharacter the nameCharacter to set
-	 */
-	public void setNameCharacter(String nameCharacter) {
-		this.nameCharacter = nameCharacter;
-	}
 }

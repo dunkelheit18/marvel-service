@@ -25,16 +25,17 @@ public interface MarvelComicsRepository extends JpaRepository<Comics, Integer>{
 		List<Object> objects = getComicsAll(idCharacter);
 		
 		return objects.stream().map(o -> {
-			Comics comic = new Comics();
 			
 			Object[] obj = ObjectUtils.toObjectArray(o);
 			
-			comic.setResources(obj[0].toString());
-			comic.setId(Integer.parseInt(obj[1].toString()));
-			comic.setIdCharacter(Integer.parseInt(obj[2].toString()));
-			comic.setName(obj[3].toString());
+			return Comics.builder()
+					.resources(obj[0].toString())
+					.id(Integer.parseInt(obj[1].toString()))
+					.idCharacter(Integer.parseInt(obj[2].toString()))
+					.name(obj[3].toString())
+					.build();
 			
-			return comic;
+			
 		}).collect(Collectors.toList());
 		
 	}

@@ -1,6 +1,6 @@
 package com.mx.application.marvel.api.persistence.entity;
 
-import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,22 +20,17 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table(name = "SERIES")
-public class Series implements Serializable {
+@Table(name = "BITACORA_API_ACCESS")
+public class Bitacora {
 
-	private static final long serialVersionUID = -733392748603236160L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_SERIES")
-	private Integer id;
+	@Column(name = "ID_BITACORA")
+	private Integer idBitacora;
 	
 	@Column(name = "ID_CHARACTERER")
-	private Integer idCharacter;
+	private Integer idCharacters;
 	
-	@Column(name = "RESOURCE_SERIES")
-	private String resources;
-	
-	@Column(name = "NAME_SERIES")
-	private String name;
+	@Column(name = "DATE_ACCESS")
+	private Date dateAcces;
 }

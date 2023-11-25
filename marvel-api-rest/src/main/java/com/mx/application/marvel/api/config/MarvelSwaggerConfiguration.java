@@ -25,13 +25,9 @@ public class MarvelSwaggerConfiguration {
 		
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.mx.application.marvel.api.application.controller"))
-				.paths(PathSelectors.any()).build().apiInfo(createApiinfo());
-	}
-	
-	
-	public ApiInfo createApiinfo() {
-		
-		return new ApiInfo("Marvel API", "Maerverl Data Extarct", "1.0", "",
-				new Contact("Aaron Hernandez", "", "aaron.hg@outlook.com"), "", "", Collections.emptyList());
+				.paths(PathSelectors.any()).build()
+				.apiInfo(new ApiInfo("Marvel API", "Maerverl Data Extarct", "1.0", "",
+						 new Contact("Aaron Hernandez", "", "aaron.hg@outlook.com"), "", "", 
+						 Collections.emptyList()));
 	}
 }

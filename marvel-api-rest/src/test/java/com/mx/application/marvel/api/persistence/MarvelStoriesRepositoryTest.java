@@ -23,11 +23,11 @@ public class MarvelStoriesRepositoryTest {
 	
 	@BeforeEach
 	public void setUp() {
-		stories = new Stories();
-		
-		stories.setIdCharacter(1009664);
-		stories.setName("THOR (1998) #76");
-		stories.setResources("http://gateway.marvel.com/v1/public/stories/876");
+		stories = Stories.builder()
+				.idCharacter(1009664)
+				.name("THOR (1998) #76")
+				.resources("http://gateway.marvel.com/v1/public/stories/876")
+				.build();
 	}
 	
 	@Test

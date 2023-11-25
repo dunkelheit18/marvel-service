@@ -23,11 +23,11 @@ public class MarvelEventsRepositoryTest {
 	
 	@BeforeEach
 	public void setUp() {
-		events = new Events();
-		
-		events.setIdCharacter(1009664);
-		events.setName("Acts of Vengeance!");
-		events.setResources("http://gateway.marvel.com/v1/public/events/116");
+		events = Events.builder()
+				.idCharacter(1009664)
+				.name("Acts of Vengeance!")
+				.resources("http://gateway.marvel.com/v1/public/events/116")
+				.build();
 	}
 	
 	@Test

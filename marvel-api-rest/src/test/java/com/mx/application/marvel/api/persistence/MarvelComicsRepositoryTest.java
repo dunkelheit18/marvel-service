@@ -23,11 +23,11 @@ public class MarvelComicsRepositoryTest {
 	
 	@BeforeEach
 	public void setUp() {
-		comics = new Comics();
-		
-		comics.setIdCharacter(1009664);
-		comics.setName("Age of Heroes (2010) #1");
-		comics.setResources("http://gateway.marvel.com/v1/public/comics/30090");
+		comics = Comics.builder()
+				.idCharacter(1009664)
+				.name("Age of Heroes (2010) #1")
+				.resources("http://gateway.marvel.com/v1/public/comics/30090")
+				.build();
 	}
 	
 	@Test

@@ -9,9 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author jahernandezg
  */
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = "STORIES")
 public class Stories implements Serializable {

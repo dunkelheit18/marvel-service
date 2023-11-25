@@ -23,11 +23,11 @@ public class MarvelSeriesRepositoryTest {
 	
 	@BeforeEach
 	public void setUp() {
-		series = new Series();
-		
-		series.setIdCharacter(1009664);
-		series.setName("A+X (2012 - 2014)");
-		series.setResources("http://gateway.marvel.com/v1/public/series/16450");
+		series = Series.builder()
+				.idCharacter(1009664)
+				.name("A+X (2012 - 2014)")
+				.resources("http://gateway.marvel.com/v1/public/series/16450")
+				.build();
 	}
 	
 	@Test

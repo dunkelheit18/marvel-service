@@ -25,16 +25,15 @@ public interface MarvelEventsRepository extends JpaRepository<Events, Integer>{
 		List<Object> objects = getEventsAll(idCharacter);
 		
 		return objects.stream().map(o -> {
-			Events events = new Events();
 			
 			Object[] obj = ObjectUtils.toObjectArray(o);
 			
-			events.setResources(obj[0].toString());
-			events.setId(Integer.parseInt(obj[1].toString()));
-			events.setIdCharacter(Integer.parseInt(obj[2].toString()));
-			events.setName(obj[3].toString());
-			
-			return events;
+			return Events.builder()
+					.resources(obj[0].toString())
+					.id(Integer.parseInt(obj[1].toString()))
+					.idCharacter(Integer.parseInt(obj[2].toString()))
+					.name(obj[3].toString())
+					.build();
 		}).collect(Collectors.toList());
 	}
 }
