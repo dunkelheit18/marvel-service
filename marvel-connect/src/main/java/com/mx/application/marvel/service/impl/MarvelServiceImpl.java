@@ -42,20 +42,23 @@ public class MarvelServiceImpl implements MarvelService {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				MarvelCharacters obj = mapper.readValue(serviceResponse, MarvelCharacters.class);
-				String[] charactersData =  getCharacterData(obj);
-				
-				response.setId(Integer.parseInt(charactersData[0]));
-				response.setName(charactersData[1]);
-				response.setDescription(charactersData[2]);
-				response.setModified(charactersData[3]);
-				response.setComics(getComicsItems(obj));
-				response.setEvents(getEventsItems(obj));
-				response.setSeries(getSeriesItems(obj));
-				response.setStories(getStoriesItems(obj));
-				
-				response.setSuccess(true);
-				response.setMarvelCharacters(obj);
-				
+				if(obj != null) {
+					String[] charactersData =  getCharacterData(obj);
+					
+					response.setId(charactersData[0]!= null && charactersData[0] != ""? Integer.parseInt(charactersData[0]) : 0);
+					response.setName(charactersData[1]);
+					response.setDescription(charactersData[2]);
+					response.setModified(charactersData[3]);
+					response.setComics(getComicsItems(obj));
+					response.setEvents(getEventsItems(obj));
+					response.setSeries(getSeriesItems(obj));
+					response.setStories(getStoriesItems(obj));
+					response.setSuccess(true);
+					response.setMarvelCharacters(obj);
+				}
+				else {
+					response.setSuccess(false);
+				}
 			} catch (JsonMappingException e) {
 				response.setSuccess(false);
 				e.printStackTrace();
@@ -84,14 +87,23 @@ public class MarvelServiceImpl implements MarvelService {
 			try {			
 				MarvelCharacters obj = mapper.readValue(serviceResponse, MarvelCharacters.class);
 				
-				response.setComics(getComicsItems(obj));
-				response.setEvents(getEventsItems(obj));
-				response.setSeries(getSeriesItems(obj));
-				response.setStories(getStoriesItems(obj));
-				
-				response.setSuccess(true);
-				response.setMarvelCharacters(obj);
-				
+				if(obj != null) {
+					String[] charactersData =  getCharacterData(obj);
+					
+					response.setId(charactersData[0]!= null && charactersData[0] != ""? Integer.parseInt(charactersData[0]) : 0);
+					response.setName(charactersData[1]);
+					response.setDescription(charactersData[2]);
+					response.setModified(charactersData[3]);
+					response.setComics(getComicsItems(obj));
+					response.setEvents(getEventsItems(obj));
+					response.setSeries(getSeriesItems(obj));
+					response.setStories(getStoriesItems(obj));
+					response.setSuccess(true);
+					response.setMarvelCharacters(obj);
+				}
+				else {
+					response.setSuccess(false);
+				}
 			} catch (JsonMappingException e) {
 				response.setSuccess(false);
 				e.printStackTrace();

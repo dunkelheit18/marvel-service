@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import org.springframework.util.CollectionUtils;
+
 import com.mx.application.marvel.service.model.MarvelCharacters;
 import com.mx.application.marvel.service.model.MarvelComics;
 import com.mx.application.marvel.service.model.MarvelEvents;
@@ -25,26 +27,29 @@ public class MarvelUtils {
 		String description = "";
 		String modified = "";
 		
-		LinkedHashMap<?, ?> data = characters.getData().getResults().stream()
+		List<LinkedHashMap<?, ?>> optional =  characters.getData().getResults().stream()
 				.filter(p -> p instanceof LinkedHashMap<?,?>)
 				.map(o -> (LinkedHashMap<?,?>) o)
-				.collect(Collectors.toList()).get(0);
+				.collect(Collectors.toList());
 		
-		for (Entry<?,?> entry : data.entrySet()) {
-			if(id.isEmpty()) {
-				id = entry.getKey().toString().equals("id") ? entry.getValue().toString() : "";
-			}
-			if(name.isEmpty()) {
-				name = entry.getKey().toString().equals("name") ? entry.getValue().toString() : "";
-			}
-			if(description.isEmpty()) {
-				description = entry.getKey().toString().equals("description") ? entry.getValue().toString() : "";
-			}
-			if(modified.isEmpty()) {
-				modified = entry.getKey().toString().equals("modified") ? entry.getValue().toString() : "";
+		if(!CollectionUtils.isEmpty(optional)) {			
+			LinkedHashMap<?, ?> data = optional.get(0);
+			
+			for (Entry<?,?> entry : data.entrySet()) {
+				if(id.isEmpty()) {
+					id = entry.getKey().toString().equals("id") ? entry.getValue().toString() : "";
+				}
+				if(name.isEmpty()) {
+					name = entry.getKey().toString().equals("name") ? entry.getValue().toString() : "";
+				}
+				if(description.isEmpty()) {
+					description = entry.getKey().toString().equals("description") ? entry.getValue().toString() : "";
+				}
+				if(modified.isEmpty()) {
+					modified = entry.getKey().toString().equals("modified") ? entry.getValue().toString() : "";
+				}
 			}
 		}
-		
 		return new String[] {id, name, description, modified};
 	}
 	
@@ -204,7 +209,7 @@ public class MarvelUtils {
 		
 		for (Object obj : itemsList) {
 			
-			MarvelItems item = new MarvelItems();;
+			MarvelItems item = new MarvelItems();
 			LinkedHashMap<?, ?> items = (LinkedHashMap<?, ?>) obj;
 			
 			items.entrySet().stream().forEach(e -> {
