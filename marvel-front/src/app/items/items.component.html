@@ -1,7 +1,7 @@
-<button (click)="this.appSercie.getBitacora"> Consultar bitacora</button>
+<button (click)="this.consultBitacora()"> Consultar bitacora</button>
 <div>
     <h2>Bitacora de Accessos a la API de Marvel</h2>
-    <li *ngFor="let items of this.appSercie.resultData">
+    <li *ngFor="let items of this.data">
         {{ items.dateAcces }}
     </li>
 </div>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { response } from 'express';
 import { Observable } from 'rxjs';
@@ -8,9 +8,13 @@ import { json } from 'stream/consumers';
   providedIn: 'root'
 })
 export class ApiService {
-
-  private url = 'http://localhost:8080/marvel/api/bitacora/loadAccess';
   public resultData: any;
+  private url     = 'http://localhost:8080/marvel/api/bitacora/loadAccess';
+  private httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type' : 'application/json'
+    })
+  };
 
 
   constructor(private http: HttpClient) { }
@@ -23,6 +27,7 @@ export class ApiService {
   }
 
   public getBitacora(): Observable<any> {
-    return this.http.get<any>(this.url);
+    //this.headers.append('Content-Type', 'application/json');
+    return this.http.get<any>(this.url, this.httpOptions );
   }
 }

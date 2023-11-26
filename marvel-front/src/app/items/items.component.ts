@@ -11,5 +11,13 @@ import { ApiService } from '../service/api.service';
 })
 export class ItemsComponent {
 
-  constructor(public appSercie: ApiService) { }
+  constructor(private apiService: ApiService) { }
+
+  data: any[] = [];
+
+  consultBitacora(){
+    this.apiService.getBitacora().subscribe( data => {
+      this.data  = data;
+    });
+  }
 }

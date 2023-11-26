@@ -14,17 +14,9 @@ export class AppComponent implements OnInit{
   
   title = 'marvel-front';
 
-  constructor(private apiService: ApiService) { }
-
-  data: any[] = [];
+  constructor() { }
 
   ngOnInit(): void {
     
-  }
-
-  consultBitacora(){
-    this.apiService.getBitacora().subscribe( data => {
-      this.data  = data;
-    });
   }
 }
