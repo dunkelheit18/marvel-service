@@ -42,7 +42,7 @@ public class MarvelServiceImpl implements MarvelService {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				MarvelCharacters obj = mapper.readValue(serviceResponse, MarvelCharacters.class);
-				if(obj != null) {
+				if(obj != null && obj.getCode().intValue() == 200) {
 					String[] charactersData =  getCharacterData(obj);
 					
 					response.setId(charactersData[0]!= null && charactersData[0] != ""? Integer.parseInt(charactersData[0]) : 0);
@@ -57,6 +57,7 @@ public class MarvelServiceImpl implements MarvelService {
 					response.setMarvelCharacters(obj);
 				}
 				else {
+					response.setMarvelCharacters(obj);
 					response.setSuccess(false);
 				}
 			} catch (JsonMappingException e) {
@@ -87,7 +88,7 @@ public class MarvelServiceImpl implements MarvelService {
 			try {			
 				MarvelCharacters obj = mapper.readValue(serviceResponse, MarvelCharacters.class);
 				
-				if(obj != null) {
+				if(obj != null && obj.getCode().intValue() == 200) {
 					String[] charactersData =  getCharacterData(obj);
 					
 					response.setId(charactersData[0]!= null && charactersData[0] != ""? Integer.parseInt(charactersData[0]) : 0);
@@ -102,6 +103,7 @@ public class MarvelServiceImpl implements MarvelService {
 					response.setMarvelCharacters(obj);
 				}
 				else {
+					response.setMarvelCharacters(obj);
 					response.setSuccess(false);
 				}
 			} catch (JsonMappingException e) {
