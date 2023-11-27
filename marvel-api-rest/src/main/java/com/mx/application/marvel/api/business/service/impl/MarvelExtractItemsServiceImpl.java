@@ -35,7 +35,8 @@ public class MarvelExtractItemsServiceImpl implements MarvelExtractItemsService 
 		
 		MarvelCharacteresResponse response = marvelExctractService.extractDataByName(Name);
 		
-		return MarvelCharcterResponse.builder()
+		return response.getSuccess() ?
+				MarvelCharcterResponse.builder()
 				.Id(response.getId())
 				.name(response.getName())
 				.description(response.getDescription())
@@ -45,7 +46,7 @@ public class MarvelExtractItemsServiceImpl implements MarvelExtractItemsService 
 				.events(this.getEvents(response.getEvents(), response.getId()))
 				.series(this.getSeries(response.getSeries(), response.getId()))
 				.stories(this.saveStories(response.getStories(), response.getId()))
-				.build();
+				.build() : MarvelCharcterResponse.builder().build();
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class MarvelExtractItemsServiceImpl implements MarvelExtractItemsService 
 		
 		MarvelCharacteresResponse response = marvelExctractService.extractDataById(idCharacters);
 		
-		return MarvelCharcterResponse.builder()
+		return response.getSuccess() ? MarvelCharcterResponse.builder()
 				.Id(response.getId())
 				.name(response.getName())
 				.description(response.getDescription())
@@ -63,7 +64,7 @@ public class MarvelExtractItemsServiceImpl implements MarvelExtractItemsService 
 				.events(this.getEvents(response.getEvents(), response.getId()))
 				.series(this.getSeries(response.getSeries(), response.getId()))
 				.stories(this.saveStories(response.getStories(), response.getId()))
-				.build();
+				.build() : MarvelCharcterResponse.builder().build();
 	}
 
 	private List<Comics> getComics(List<MarvelComics> lisComics, Integer idCharacters) {
