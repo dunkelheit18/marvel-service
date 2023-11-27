@@ -31,7 +31,7 @@ button {
   #lista4 ol {
     counter-reset: li; 
     list-style: none; 
-    *list-style: decimal; 
+    list-style: decimal; 
     font: 15px 'trebuchet MS', 'lucida sans';
     padding: 0;
     margin-bottom: 4em;
@@ -46,9 +46,9 @@ button {
     list-style-type: none;
     list-style-type: decimal !ie;
      
-    margin: 0;
+    margin: 0, 0, 0;
     margin-left: 3em;
-    padding: 0;
+    padding: 0, 0, 0;
      
     counter-reset: li-counter;
 }
@@ -82,5 +82,25 @@ button {
     content: counter(li-counter);
     counter-increment: li-counter;
 }
-
+input.text {
+    background: silver;
+    border: 1px solid #393939;
+    border-radius: 5px 5px 5px 5px;
+    color: #393939;
+    font-size: 12px;
+    padding: 5px;
+ }
+ h2 {
+    color: #3c1b66;
+    font-weight: normal;
+    font-size: 35px;
+    font-family: Arial;
+    text-transform: uppercase;
+  }
+  h3 {
+    color: #443963;
+    font-weight: normal;
+    font-size: 30px;
+    font-family: Arial;
+  }
 tr:hover td { background: #d0dafd; color: #339; }
