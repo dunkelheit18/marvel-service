@@ -21,6 +21,7 @@ export class ItemsComponent {
   eventsData: any[] = [];
   seriesData: any[] = [];
   storiesData: any[] = [];
+  nameCharacters: string = " ";
 
   consultBitacora(){
     this.apiService.getBitacora().subscribe( data => {
@@ -36,30 +37,40 @@ export class ItemsComponent {
       console.log(error);
     });
   }
-  consulCharacteres(name : string){
+  consulCharacteres(name : string, id: string){
 
-    if(name != null && name != undefined && name !=''){
-      this.apiService.getCharacters(name).subscribe( data =>{
-        if(data != null && data != undefined){
-          let result = data;
-          this.charactersData = result;
-          this.comicsData = result.comics;
-          this.eventsData = result.events;
-          this.seriesData = result.series;
-          this.storiesData = result.stories;
-          console.log(data);
-        }
-        else{
-          this.snackBar.open('No se encontraron resultados en la búsqueda...', 'Cerrar');
-        }
-      },
-      (error: HttpErrorResponse) => {
-        this.snackBar.open('No se encontraron resultados en la búsqueda...', 'Cerrar');
-        console.log(error);
-      });
+    let banderaNombre  = name != null && name != undefined && name !='' ? true : false;
+    let banderaId      = id != null && id != undefined && id != '' ? true : false;
+    
+    if(banderaNombre || banderaId){   
+          if(banderaNombre && banderaId){
+            this.snackBar.open('Solo se puede seleccionar el nombre o ID', 'Cerrar');
+          }
+          else {
+            let idCharacter = parseInt(id); 
+            this.apiService.getCharacters(name, idCharacter).subscribe( data =>{
+              if(data != null && data != undefined){
+                let result = data;
+                this.charactersData = result;
+                this.comicsData = result.comics;
+                this.eventsData = result.events;
+                this.seriesData = result.series;
+                this.storiesData = result.stories;
+                this.nameCharacters = result.name;
+                console.log(data);
+              }
+              else{
+                this.snackBar.open('No se encontraron resultados en la búsqueda...', 'Cerrar');
+              }
+            },
+            (error: HttpErrorResponse) => {
+              this.snackBar.open('No se encontraron resultados en la búsqueda...', 'Cerrar');
+              console.log(error);
+            });
+          }
     }
     else{
-        this.snackBar.open('Favor de ingresar el nombre del personaje.', 'Cerrar');
+        this.snackBar.open('Favor de ingresar el Nombre o Identificado del personaje.', 'Cerrar');
     }
   }
 }

@@ -10,21 +10,23 @@ export class ApiService {
   public resultData: any;
   private urlBitacora     = 'http://localhost:8080/marvel/api/bitacora/loadAccess';
   private urlCharactersName = 'http://localhost:8080/marvel/api/characters/findName';
+  private urlCharactersId = 'http://localhost:8080/marvel/api/characters/findId';
   private httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
 
- public getCharacters(name : string) : Observable<any>{
+ public getCharacters(name : string, id : number) : Observable<any>{
 
     const params = new HttpParams()
-        .set('name', name);
+        .set( name != null && name != undefined && name != '' ? 'name' : 'idCharacters',
+              name != null && name != undefined && name != '' ? name : id);
 
     const httpOptions = {
       headers : this.httpHeaders,
       params: params,
 
     };
-    return this.http.get<any>(this.urlCharactersName, httpOptions );
+    return this.http.get<any>(this.validateCharactersService(name, id), httpOptions );
   }
 
   public getBitacora(): Observable<any> {
@@ -33,5 +35,11 @@ export class ApiService {
     };
     //this.headers.append('Content-Type', 'application/json');
     return this.http.get<any>(this.urlBitacora, httpOptions );
+  }
+
+  private validateCharactersService(name : string, id : number) : string {
+
+    return name != null && name != undefined && name != '' ? this.urlCharactersName : 
+      (id != null && id != undefined ? this.urlCharactersId : '');
   }
 }

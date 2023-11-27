@@ -103,4 +103,22 @@ input.text {
     font-size: 30px;
     font-family: Arial;
   }
+  h4 {
+    color: #4f4866;
+    font-weight: normal;
+    font-size: 25px;
+    font-family: Arial;
+  }
+  h5 {
+    color: #656172;
+    font-weight: normal;
+    font-size: 20px;
+    font-family: Arial;
+  }
+  h6 {
+    color: #747377;
+    font-weight: normal;
+    font-size: 18px;
+    font-family: Arial;
+  }
 tr:hover td { background: #d0dafd; color: #339; }
