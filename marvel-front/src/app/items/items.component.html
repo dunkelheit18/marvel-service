@@ -1,7 +1,125 @@
-<button (click)="this.consultBitacora()"> Consultar bitacora</button>
-<div>
+<div class="" align="center">
     <h2>Bitacora de Accessos a la API de Marvel</h2>
-    <li *ngFor="let items of this.data">
-        {{ items.dateAcces }}
-    </li>
+    <div class="">
+        <button (click)="this.consultBitacora()"> Consultar bitacora</button>
+    </div>
+    <br>
+    <ol id="lista4">
+        <li *ngFor="let items of this.data">
+            {{ items.dateAcces }}
+        </li>
+    </ol>
+</div>
+
+<div class="" align="center">
+    <h3> Consultar personaje</h3>
+    <div class="">
+        <label for="idNombrePersonaje"> Nombre del personaje: </label>
+        <input type="text" id="idNombrePersonaje" #nameCharacters/>
+        <br>
+        <br>
+        <button (click)="this.consulCharacteres(nameCharacters.value)"> Buscar </button>
+    </div>
+    <br>
+    <br>
+    <div class="">
+        <table id="tbComics" class="">
+            <caption>Comics</caption>
+            <thead>
+                <tr>
+                    <th>Id:</th>
+                    <th>Nombre:</th>
+                    <th>Link:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let comics of this.comicsData">
+                    <td>
+                        {{ comics.id}}
+                    </td>
+                    <td>
+                        {{ comics.name }}
+                    </td>
+                    <td>
+                        <a href="{{ comics.resources }}">Clic</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <table id="tbEvents">
+            <caption>Eventos</caption>
+            <thead>
+                <tr>
+                    <th>Id:</th>
+                    <th>Nombre:</th>
+                    <th>Link:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let eventos of this.eventsData">
+                    <td>
+                        {{ eventos.id}}
+                    </td>
+                    <td>
+                        {{ eventos.name }}
+                    </td>
+                    <td>
+                        <a href="{{ eventos.resources }}">Clic</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <table id="tbSeries">
+            <caption>Series</caption>
+            <thead>
+                <tr>
+                    <th>Id:</th>
+                    <th>Nombre:</th>
+                    <th>Link:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let series of this.seriesData">
+                    <td>
+                        {{ series.id}}
+                    </td>
+                    <td>
+                        {{ series.name }}
+                    </td>
+                    <td>
+                        <a href="{{ series.resources }}">Clic</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <table id="tbHistorias">
+            <caption>Historias</caption>
+            <thead>
+                <tr>
+                    <th>Id:</th>
+                    <th>Nombre:</th>
+                    <th>Link:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stories of this.storiesData">
+                    <td>
+                        {{ stories.id}}
+                    </td>
+                    <td>
+                        {{ stories.name }}
+                    </td>
+                    <td>
+                        <a href="{{ stories.resources }}">Clic</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

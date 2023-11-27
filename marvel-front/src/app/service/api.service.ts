@@ -1,33 +1,37 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, NgModule } from '@angular/core';
-import { response } from 'express';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { json } from 'stream/consumers';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   public resultData: any;
-  private url     = 'http://localhost:8080/marvel/api/bitacora/loadAccess';
-  private httpOptions = {
-    headers : new HttpHeaders({
-      'Content-Type' : 'application/json'
-    })
-  };
-
+  private urlBitacora     = 'http://localhost:8080/marvel/api/bitacora/loadAccess';
+  private urlCharactersName = 'http://localhost:8080/marvel/api/characters/findName';
+  private httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
 
-  getData() {
-    fetch(this.url)
-    .then((response) => response.json())
-    .then((json)=> console.log(json))
-    .then((rData) => rData = this.resultData)
+ public getCharacters(name : string) : Observable<any>{
+
+    const params = new HttpParams()
+        .set('name', name);
+
+    const httpOptions = {
+      headers : this.httpHeaders,
+      params: params,
+
+    };
+    return this.http.get<any>(this.urlCharactersName, httpOptions );
   }
 
   public getBitacora(): Observable<any> {
+   const httpOptions = {
+      headers : this.httpHeaders
+    };
     //this.headers.append('Content-Type', 'application/json');
-    return this.http.get<any>(this.url, this.httpOptions );
+    return this.http.get<any>(this.urlBitacora, httpOptions );
   }
 }
