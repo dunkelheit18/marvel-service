@@ -42,4 +42,9 @@ export class ApiService {
     return name != null && name != undefined && name != '' ? this.urlCharactersName : 
       (id != null && id != undefined ? this.urlCharactersId : '');
   }
+
+  public getImageElemnt(url: string): Observable<any> {
+
+    return this.http.get<any>(`${url}?ts=1&apikey=5365d50e0ed423f38197671843b5d60a&hash=9a5059a3bae61e6b564ff7b1e467b56c`);
+  }
 }

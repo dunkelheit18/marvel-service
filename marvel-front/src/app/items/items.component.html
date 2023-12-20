@@ -3,6 +3,7 @@
     <h2>Bitacora de Accessos a la API de Marvel</h2>
     <div class="">
         <button (click)="this.consultBitacora()"> Consultar bitacora</button>
+        <button (click)="this.cleanBitacora()"> Limpiar bitacora </button>
     </div>
     <br>
     <ol id="lista4">
@@ -24,6 +25,7 @@
         <br>
         <br>
         <button (click)="this.consulCharacteres(nameCharacters.value, IDCharacters.value)"> Buscar </button>
+        <button (click)="this.cleanCharacters()"> Limpiar </button>
     </div>
     <br>
     <br>
@@ -46,7 +48,7 @@
                         {{ comics.name }}
                     </td>
                     <td>
-                        <a href="{{ comics.resources }}">Clic</a>
+                        <a href="javascript:void(0)" (click)="this.getImage(comics.resources, 'c')">Clic</a>
                     </td>
                 </tr>
             </tbody>
@@ -71,7 +73,7 @@
                         {{ eventos.name }}
                     </td>
                     <td>
-                        <a href="{{ eventos.resources }}">Clic</a>
+                        <a href="javascript:void(0)" (click)="this.getImage(eventos.resources, 'e')">Clic</a>
                     </td>
                 </tr>
             </tbody>
@@ -96,7 +98,7 @@
                         {{ series.name }}
                     </td>
                     <td>
-                        <a href="{{ series.resources }}">Clic</a>
+                        <a href="javascript:void(0)" (click)="this.getImage(series.resources, 'se')">Clic</a>
                     </td>
                 </tr>
             </tbody>
@@ -121,7 +123,7 @@
                         {{ stories.name }}
                     </td>
                     <td>
-                        <a href="{{ stories.resources }}">Clic</a>
+                        <a href="javascript:void(0)" (click)="this.getImage(stories.resources, 'st')">Clic</a>
                     </td>
                 </tr>
             </tbody>

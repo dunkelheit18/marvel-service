@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../service/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-items',
@@ -13,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ItemsComponent {
 
-  constructor(private apiService: ApiService, private snackBar : MatSnackBar) { }
+  constructor(private apiService: ApiService, private snackBar : MatSnackBar, public dialog : MatDialog) { }
 
   data: any[] = [];
   charactersData: any[] = [];
@@ -22,6 +24,8 @@ export class ItemsComponent {
   seriesData: any[] = [];
   storiesData: any[] = [];
   nameCharacters: string = " ";
+  mostrarPopUp : boolean = false;
+  imagenUrl: any = "";
 
   consultBitacora(){
     this.apiService.getBitacora().subscribe( data => {
@@ -72,5 +76,39 @@ export class ItemsComponent {
     else{
         this.snackBar.open('Favor de ingresar el Nombre o Identificado del personaje.', 'Cerrar');
     }
+  }
+
+  getImage(link : string, type : string){
+
+    this.apiService.getImageElemnt(link).subscribe( response => {
+      
+      let responseUrl = '';
+
+      if(type == 'c'){
+        responseUrl = response.data.results[0].images[0].path;
+      }
+      else {
+        responseUrl = response.data.results[0].thumbnail.path;
+      }
+
+      if(responseUrl != null && responseUrl != undefined && responseUrl != ''){
+        const dialogRef = this.dialog.open(PopupComponent, {
+          data: { imagenUrl : responseUrl  + '/detail.jpg'}
+        });
+      }
+      else {
+        this.snackBar.open('No hay información ...', 'Cerrar');
+      }
+    });
+  }
+  cleanBitacora(): void {
+    this.data = [];
+  }
+
+  cleanCharacters() : void {
+    this.comicsData = [];
+    this.eventsData = [];
+    this.seriesData = [];
+    this.storiesData = [];
   }
 }
